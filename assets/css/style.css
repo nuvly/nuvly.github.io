@@ -1,41 +1,29 @@
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background-color: #1a1a1a;
-  color: #fff;
+  background-color: #000000; /* Black background */
+  color: #FF69B4; /* Hot pink text */
+  font-family: "Consolas", "Courier New", monospace; /* MS-DOS-like font */
+  font-size: 16px;
+  line-height: 1.5;
 }
-header {
-  text-align: center;
-  padding: 10px;
-  background-color: #ff69b4; /* Neon pink */
-}
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-nav ul li {
-  display: inline;
-  margin: 0 15px;
-}
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
-nav ul li a:hover {
-  color: #ff1493; /* Deeper pink on hover */
-}
-.page-content {
+.dos-content {
   max-width: 800px;
-  margin: 20px auto;
+  margin: 0 auto;
 }
-footer {
-  text-align: center;
-  padding: 10px;
-  background-color: #ff69b4;
-  margin-top: 20px;
+h1, h2, h3, h4, h5, h6 {
+  color: #FFFFFF; /* White headers */
+  text-transform: uppercase;
+}
+a {
+  color: #FFFFFF; /* White links */
+  text-decoration: underline;
+}
+a:hover {
+  color: #FF1493; /* Slightly darker pink on hover */
 }
 img {
   max-width: 100%;
   height: auto;
+  border: 2px solid #FF69B4; /* Hot pink border around image */
 }
