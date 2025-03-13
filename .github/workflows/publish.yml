@@ -1,0 +1,23 @@
+name: Auto Publish Beauty Posts
+on:
+  schedule:
+    - cron: '0 0 * * 1,4' # Monday & Thursday at midnight UTC
+  workflow_dispatch:
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - run: pip install requests beautifulsoup4
+      - run: python generate_post.py
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      - run: |
+          git config user.name "Auto Beauty Bot"
+          git config user.email "auto@beautybot.com"
+          git add .
+          git commit -m "Auto post: $(date +%Y-%m-%d)" || echo "No new post"
+          git push
