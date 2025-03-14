@@ -35,7 +35,16 @@ post_content = f"""
 """
 
 # Load affiliate links and select based on priority (Rakuten > Impact > Amazon)
-category = topic.lower().split()[0]  # e.g., "skincare" from "Test Skincare Post"
+# Improved category extraction: look for known categories in the topic
+known_categories = ["skincare", "lipstick", "haircare", "fragrance"]
+category = None
+for cat in known_categories:
+    if cat in topic.lower():
+        category = cat
+        break
+if not category:
+    category = topic.lower().split()[0]  # Fallback to first word if no match
+
 try:
     with open('affiliate_links.json', 'r') as f:
         links = json.load(f)
