@@ -1,63 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://nuvly.github.io/</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-13-Here's-What-the-“Mob-Wife”-Aesthetic-Says-About-2024-Beauty-Trends.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-14-top-5-lipsticks.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-13-welcome-to-beauty.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-13-skincare-routine-tips.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-13-best-makeup-trends.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-13-haircare-essentials.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/2025-03-13-top-fragrance-picks.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/about.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://nuvly.github.io/privacy.html</loc>
-        <lastmod>2025-03-14</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
+<url>
+<loc>https://nuvly.github.io/2025-03-14-Test-Skincare-Post.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url><url>
+<loc>https://nuvly.github.io/2025-03-14-Test-Skincare-Post.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url><url>
+<loc>https://nuvly.github.io/2025-03-14-Test-Skincare-Post.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url><url>
+<loc>https://nuvly.github.io/2025-03-14-Here's-What-the-“Mob-Wife”-Aesthetic-Says-About-2024-Beauty-Trends.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url><url>
+<loc>https://nuvly.github.io/</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-13-Here's-What-the-“Mob-Wife”-Aesthetic-Says-About-2024-Beauty-Trends.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-14-top-5-lipsticks.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-13-welcome-to-beauty.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-13-skincare-routine-tips.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-13-best-makeup-trends.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-13-haircare-essentials.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/2025-03-13-top-fragrance-picks.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/about.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
+<url>
+<loc>https://nuvly.github.io/privacy.html</loc>
+<lastmod>2025-03-14</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
+</url>
 </urlset>
