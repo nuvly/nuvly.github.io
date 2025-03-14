@@ -35,7 +35,6 @@ post_content = f"""
 """
 
 # Load affiliate links and select based on priority (Rakuten > Impact > Amazon)
-# Improved category extraction: look for known categories in the topic
 known_categories = ["skincare", "lipstick", "haircare", "fragrance"]
 category = None
 for cat in known_categories:
@@ -48,7 +47,6 @@ if not category:
 try:
     with open('affiliate_links.json', 'r') as f:
         links = json.load(f)
-    # Priority: Rakuten > Impact > Amazon
     if category in links.get("rakuten", {}):
         affiliate_link = random.choice(links["rakuten"][category])
     elif category in links.get("impact", {}):
@@ -56,7 +54,6 @@ try:
     else:
         affiliate_link = random.choice(links["amazon"].get(category, ["https://www.amazon.com/?tag=nuvly-20"]))
 except FileNotFoundError:
-    # Fallback if affiliate_links.json doesn't exist
     affiliate_link = "https://www.sephora.com?affid=placeholder"
 
 post_content += f"<p>DOWNLOAD THIS LOOK: <a href='{affiliate_link}'>SHOP {topic} NOW</a></p><p>RELATED: <a href='best-skincare-products.html'>BEST SKINCARE TIPS—NUVLY STYLE</a></p>"
@@ -105,12 +102,21 @@ try:
         previews_section = soup.find("h3", string="LATEST BEAUTY SCANS")
         print("Looking for LATEST BEAUTY SCANS - Found:", previews_section)
         if previews_section:
-            # Insert new preview right after the h3
-            new_preview = soup.new_tag("p")
-            new_preview.string = f"<a href='{filename}'>{topic} REVIEW</a> - {post_content[50:100]}..."
-            previews_section.insert_after(new_preview)
-            previews_section.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
-            print(f"Added {topic} preview to index.html!")
+            # Check if the preview already exists to avoid duplicates
+            existing_previews = previews_section.find_all_next("p")
+            if not any(filename in str(p) for p in existing_previews):
+                # Create the preview with proper HTML elements
+                new_preview = soup.new_tag("p")
+                link = soup.new_tag("a", href=filename)
+                link.string = f"{topic} REVIEW"
+                new_preview.append(link)
+                # Extract plain text from post_content by removing HTML tags
+                preview_soup = BeautifulSoup(post_content[50:100], "html.parser")
+                preview_text = preview_soup.get_text()
+                new_preview.append(f" - {preview_text}...")
+                previews_section.insert_after(new_preview)
+                previews_section.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
+                print(f"Added {topic} preview to index.html!")
         else:
             # If no previews section, add it
             h1 = soup.find("h1")
@@ -119,7 +125,12 @@ try:
                 h2.string = "LATEST BEAUTY SCANS"
                 h1.insert_after(h2)
                 new_preview = soup.new_tag("p")
-                new_preview.string = f"<a href='{filename}'>{topic} REVIEW</a> - {post_content[50:100]}..."
+                link = soup.new_tag("a", href=filename)
+                link.string = f"{topic} REVIEW"
+                new_preview.append(link)
+                preview_soup = BeautifulSoup(post_content[50:100], "html.parser")
+                preview_text = preview_soup.get_text()
+                new_preview.append(f" - {preview_text}...")
                 h2.insert_after(new_preview)
                 h2.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
 except FileNotFoundError:
