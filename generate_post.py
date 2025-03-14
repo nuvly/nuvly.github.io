@@ -59,13 +59,15 @@ try:
     with open("index.html", "r", encoding="utf-8") as f:
         current_index = f.read()
         soup = BeautifulSoup(current_index, "html.parser")
-        previews_section = soup.find("h2", string="LATEST BEAUTY SCANS")
+        previews_section = soup.find("h3", string="LATEST BEAUTY SCANS")
+        print("Looking for LATEST BEAUTY SCANS - Found:", previews_section)
         if previews_section:
-            # Insert new preview right after the h2
+            # Insert new preview right after the h3
             new_preview = soup.new_tag("p")
             new_preview.string = f"<a href='{filename}'>{topic} REVIEW</a> - {post_content[50:100]}..."
             previews_section.insert_after(new_preview)
             previews_section.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
+            print("Added Mob Wife preview to index.html!")
         else:
             # If no previews section, add it
             h1 = soup.find("h1")
