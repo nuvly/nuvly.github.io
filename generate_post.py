@@ -3,16 +3,21 @@ import datetime
 import os
 import json
 import random
+import sys
 from bs4 import BeautifulSoup
 
-# Scrape Allure for beauty trends
-beauty_keywords = ['skincare', 'makeup', 'beauty', 'cosmetics', 'nail art', 'hair color']
-allure_url = "https://www.allure.com/topic/beauty-trends"
-headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36"}
-response = requests.get(allure_url, timeout=10, headers=headers)
-soup = BeautifulSoup(response.text, 'html.parser')
-trend_articles = soup.select('.summary-item__hed')  # Allure article titles
-topic = next((article.text.strip() for article in trend_articles if any(k in article.text.lower() for k in beauty_keywords)), 'Best Skincare Products')
+# Accept command-line argument for topic, fallback to Allure scraping if none provided
+if len(sys.argv) > 1:
+    topic = sys.argv[1]  # Use the provided topic (e.g., "Test Skincare Post")
+else:
+    # Scrape Allure for beauty trends if no topic is provided
+    beauty_keywords = ['skincare', 'makeup', 'beauty', 'cosmetics', 'nail art', 'hair color']
+    allure_url = "https://www.allure.com/topic/beauty-trends"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36"}
+    response = requests.get(allure_url, timeout=10, headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    trend_articles = soup.select('.summary-item__hed')  # Allure article titles
+    topic = next((article.text.strip() for article in trend_articles if any(k in article.text.lower() for k in beauty_keywords)), 'Best Skincare Products')
 
 # Generate post content in sassy robot voice
 api_url = "https://api-inference.huggingface.co/models/EleutherAI/gpt-j-6B"
@@ -30,7 +35,7 @@ post_content = f"""
 """
 
 # Load affiliate links and select based on priority (Rakuten > Impact > Amazon)
-category = topic.lower().split()[0]  # e.g., "skincare" from "Best Skincare Products"
+category = topic.lower().split()[0]  # e.g., "skincare" from "Test Skincare Post"
 try:
     with open('affiliate_links.json', 'r') as f:
         links = json.load(f)
