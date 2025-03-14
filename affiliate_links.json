@@ -1,13 +1,20 @@
 {
   "amazon": {
     "lipstick": ["https://www.amazon.com/dp/B08XYZ1234/?tag=nuvly-20"],
-    "skincare": ["https://www.amazon.com/dp/B07DEF9012/?tag=nuvly-20"]
+    "skincare": ["https://www.amazon.com/dp/B07DEF9012/?tag=nuvly-20"],
+    "haircare": ["https://www.amazon.com/dp/B09GHI5678/?tag=nuvly-20"],
+    "fragrance": ["https://www.amazon.com/dp/B06JKL9012/?tag=nuvly-20"]
   },
   "rakuten": {
-    "lipstick": ["https://click.linksynergy.com/deeplink?id=YOUR_RAKUTEN_ID&mid=2417&murl=https%3A%2F%2Fwww.sephora.com%2Flipstick"],
-    "haircare": ["https://click.linksynergy.com/deeplink?id=YOUR_RAKUTEN_ID&mid=2417&murl=https%3A%2F%2Fincommonbeauty.com%2Fhaircare"]
+    "lipstick": ["https://click.linksynergy.com/deeplink?id=nuvly-test-123&mid=2417&murl=https%3A%2F%2Fwww.sephora.com%2Flipstick"],
+    "haircare": ["https://click.linksynergy.com/deeplink?id=nuvly-test-123&mid=2417&murl=https%3A%2F%2Fincommonbeauty.com%2Fhaircare"],
+    "skincare": ["https://click.linksynergy.com/deeplink?id=nuvly-test-123&mid=2417&murl=https%3A%2F%2Fwww.sephora.com%2Fskincare"],
+    "fragrance": ["https://click.linksynergy.com/deeplink?id=nuvly-test-123&mid=2417&murl=https%3A%2F%2Fwww.sephora.com%2Ffragrance"]
   },
   "impact": {
-    "skincare": ["https://sephora.impact.com/c/?id=YOUR_IMPACT_ID&murl=https%3A%2F%2Fwww.sephora.com%2Fskincare"]
+    "skincare": ["https://sephora.impact.com/c/?id=nuvly-test-123&murl=https%3A%2F%2Fwww.sephora.com%2Fskincare"],
+    "lipstick": ["https://sephora.impact.com/c/?id=nuvly-test-123&murl=https%3A%2F%2Fwww.sephora.com%2Flipstick"],
+    "haircare": ["https://sephora.impact.com/c/?id=nuvly-test-123&murl=https%3A%2F%2Fwww.sephora.com%2Fhaircare"],
+    "fragrance": ["https://sephora.impact.com/c/?id=nuvly-test-123&murl=https%3A%2F%2Fwww.sephora.com%2Ffragrance"]
   }
 }
