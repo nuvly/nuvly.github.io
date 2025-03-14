@@ -104,15 +104,21 @@ try:
         if previews_section:
             # Check if the preview already exists to avoid duplicates
             existing_previews = previews_section.find_all_next("p")
-            if not any(filename in str(p) for p in existing_previews):
+            preview_exists = False
+            for p in existing_previews:
+                link = p.find("a")
+                if link and link.get("href") == filename:
+                    preview_exists = True
+                    break
+            if not preview_exists:
                 # Create the preview with proper HTML elements
                 new_preview = soup.new_tag("p")
                 link = soup.new_tag("a", href=filename)
                 link.string = f"{topic} REVIEW"
                 new_preview.append(link)
-                # Extract plain text from post_content by removing HTML tags
-                preview_soup = BeautifulSoup(post_content[50:100], "html.parser")
-                preview_text = preview_soup.get_text()
+                # Extract plain text from the entire post_content, then slice
+                preview_soup = BeautifulSoup(post_content, "html.parser")
+                preview_text = preview_soup.get_text()[50:100]
                 new_preview.append(f" - {preview_text}...")
                 previews_section.insert_after(new_preview)
                 previews_section.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
@@ -128,8 +134,8 @@ try:
                 link = soup.new_tag("a", href=filename)
                 link.string = f"{topic} REVIEW"
                 new_preview.append(link)
-                preview_soup = BeautifulSoup(post_content[50:100], "html.parser")
-                preview_text = preview_soup.get_text()
+                preview_soup = BeautifulSoup(post_content, "html.parser")
+                preview_text = preview_soup.get_text()[50:100]
                 new_preview.append(f" - {preview_text}...")
                 h2.insert_after(new_preview)
                 h2.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
