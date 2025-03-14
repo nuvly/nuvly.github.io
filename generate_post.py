@@ -1,6 +1,8 @@
 import requests
 import datetime
 import os
+import json
+import random
 from bs4 import BeautifulSoup
 
 # Scrape Allure for beauty trends
@@ -27,10 +29,25 @@ post_content = f"""
 <p><strong>KEYWORDS</strong>: {topic}, best {topic} 2025, buy {topic} online</p>
 """
 
-affiliate_link = "https://sephora.com?affid=yourid"  # Replace with real link later
+# Load affiliate links and select based on priority (Rakuten > Impact > Amazon)
+category = topic.lower().split()[0]  # e.g., "skincare" from "Best Skincare Products"
+try:
+    with open('affiliate_links.json', 'r') as f:
+        links = json.load(f)
+    # Priority: Rakuten > Impact > Amazon
+    if category in links.get("rakuten", {}):
+        affiliate_link = random.choice(links["rakuten"][category])
+    elif category in links.get("impact", {}):
+        affiliate_link = random.choice(links["impact"][category])
+    else:
+        affiliate_link = random.choice(links["amazon"].get(category, ["https://www.amazon.com/?tag=nuvly-20"]))
+except FileNotFoundError:
+    # Fallback if affiliate_links.json doesn't exist
+    affiliate_link = "https://www.sephora.com?affid=placeholder"
+
 post_content += f"<p>DOWNLOAD THIS LOOK: <a href='{affiliate_link}'>SHOP {topic} NOW</a></p><p>RELATED: <a href='best-skincare-products.html'>BEST SKINCARE TIPS—NUVLY STYLE</a></p>"
 
-# Generate HTML post
+# Generate HTML post with consistent MS-DOS styling
 date = datetime.datetime.now().strftime("%Y-%m-%d")
 filename = f"{date}-{topic.replace(' ', '-')}.html"
 with open(filename, "w", encoding="utf-8") as f:
@@ -39,17 +56,29 @@ with open(filename, "w", encoding="utf-8") as f:
 <html>
 <head>
     <title>{topic} REVIEW</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Nuvly’s guide to {topic.lower()} in 2025!"/>
+    <meta name="keywords" content="{topic.lower()} 2025, reviews, beauty trends"/>
+    <meta name="robots" content="index, follow"/>
     <style>
-        body {{ background-color: black; color: #FF69B4; font-family: monospace; }}
-        h1 {{ color: #FFFFFF; }}
-        a {{ color: #FFFFFF; text-decoration: none; }}
-        img {{ border: 5px solid #FF69B4; }}
+        body {{ margin: 0; padding: 20px; background-color: #000000; color: #FF69B4; font-family: "Consolas", "Courier New", monospace; font-size: 16px; line-height: 1.5; }}
+        .dos-content {{ max-width: 800px; margin: 0 auto; }}
+        h1, h3 {{ color: #FFFFFF; text-transform: uppercase; }}
+        a {{ color: #FFFFFF; text-decoration: underline; }}
+        a:hover {{ color: #FF1493; }}
+        hr {{ border: 1px dashed #FF69B4; margin: 20px 0; }}
+        img {{ max-width: 100%; height: auto; border: 5px solid #FF69B4; }}
     </style>
 </head>
 <body>
-    {post_content}
-    <hr>
-    <a href="index.html">BACK TO HOME</a>
+    <div class="dos-content">
+        <h1 style="text-align: center; font-size: 24px;">✨ NUVLY: BEAUTY BOT ✨</h1>
+        <img alt="Nuvly the Beauty Robot Diva" src="images/nuvly-robot.jpg"/>
+        {post_content}
+        <hr/>
+        <p><a href="index.html">BACK TO HOME</a></p>
+    </div>
 </body>
 </html>
 """)
@@ -67,7 +96,7 @@ try:
             new_preview.string = f"<a href='{filename}'>{topic} REVIEW</a> - {post_content[50:100]}..."
             previews_section.insert_after(new_preview)
             previews_section.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
-            print("Added Mob Wife preview to index.html!")
+            print(f"Added {topic} preview to index.html!")
         else:
             # If no previews section, add it
             h1 = soup.find("h1")
@@ -80,28 +109,38 @@ try:
                 h2.insert_after(new_preview)
                 h2.insert_after(soup.new_tag("hr", style="border: 1px dashed #FF69B4"))
 except FileNotFoundError:
-    # Fallback if index.html doesn’t exist (unlikely)
+    # Fallback if index.html doesn’t exist
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(f"""
 <!DOCTYPE html>
 <html>
 <head>
     <title>NUVLY</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Nuvly, your 2025 beauty bot with a retro MS-DOS vibe!"/>
+    <meta name="keywords" content="beauty trends 2025, makeup reviews, skincare tips"/>
+    <meta name="robots" content="index, follow"/>
     <style>
-        body {{ background-color: black; color: #FF69B4; font-family: monospace; }}
-        h1 {{ color: #FFFFFF; }}
-        a {{ color: #FFFFFF; text-decoration: none; }}
-        img {{ border: 5px solid #FF69B4; }}
-        hr {{ border: 1px dashed #FF69B4; }}
+        body {{ margin: 0; padding: 20px; background-color: #000000; color: #FF69B4; font-family: "Consolas", "Courier New", monospace; font-size: 16px; line-height: 1.5; }}
+        .dos-content {{ max-width: 800px; margin: 0 auto; }}
+        h1, h2, h3 {{ color: #FFFFFF; text-transform: uppercase; }}
+        a {{ color: #FFFFFF; text-decoration: underline; }}
+        a:hover {{ color: #FF1493; }}
+        hr {{ border: 1px dashed #FF69B4; margin: 20px 0; }}
+        img {{ max-width: 100%; height: auto; border: 5px solid #FF69B4; }}
     </style>
 </head>
 <body>
-    <h1>NUVLY’S INTRO: BEAUTY REALNESS</h1>
-    <p>Welcome to Nuvly, your digital beauty haven with a retro twist!</p>
-    <h2>LATEST BEAUTY SCANS</h2>
-    <p><a href='{filename}'>{topic} REVIEW</a> - {post_content[50:100]}...</p>
-    <hr>
-    <img src="images/nuvly-robot.jpg" alt="Nuvly Robot">
+    <div class="dos-content">
+        <h1 style="text-align: center; font-size: 24px;">✨ NUVLY: BEAUTY BOT ✨</h1>
+        <img alt="Nuvly the Beauty Robot Diva" src="images/nuvly-robot.jpg"/>
+        <p>Welcome to Nuvly, your digital beauty haven with a retro twist!</p>
+        <p style="font-size: 14px; color: #FF69B4;">Disclosure: This site contains affiliate links. If you purchase through these links, we may earn a commission at no extra cost to you.</p>
+        <h2>LATEST BEAUTY SCANS</h2>
+        <p><a href='{filename}'>{topic} REVIEW</a> - {post_content[50:100]}...</p>
+        <hr>
+    </div>
 </body>
 </html>
 """)
